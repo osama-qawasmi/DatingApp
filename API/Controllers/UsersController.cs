@@ -21,6 +21,7 @@ namespace API.Controllers
             var users = _context.Users.ToList();
             return users;
         }
+        
         [HttpGet("{id}")]
         public ActionResult<AppUser> GetUser(int Id)
         {
