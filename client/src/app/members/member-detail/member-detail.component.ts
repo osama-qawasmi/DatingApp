@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { Member } from 'app/_models/member';
 import { MembersService } from 'app/_services/members.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-member-detail',
@@ -10,8 +11,8 @@ import { MembersService } from 'app/_services/members.service';
   styleUrls: ['./member-detail.component.css']
 })
 export class MemberDetailComponent implements OnInit {
-  //member: Member | undefined;
-  member: any = null;
+  member: Member | undefined;
+  //member: any = null;
   galleryOptions: NgxGalleryOptions[] = [];
   galleryImages: NgxGalleryImage[] = [];
 

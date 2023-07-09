@@ -16,9 +16,7 @@
             "outputPath": "dist/client",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -30,6 +28,7 @@
               "node_modules/bootswatch/dist/united/bootstrap.css",
               "node_modules/font-awesome/css/font-awesome.min.css",
               "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-spinner/animations/line-scale-party.css",
               "src/styles.css"
             ],
             "scripts": []
