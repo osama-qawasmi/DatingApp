@@ -26,6 +26,11 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DatePickerComponent } from './_forms/date-picker/date-picker.component';
 import { MemberMessagesComponent } from "./members/member-messages/member-messages.component";
+import { AdminPanelComponent } from './_admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/has-role.directive';
+import { UserManagementComponent } from './_admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './_admin/photo-management/photo-management.component';
+import { RolesModalComponent } from './_modals/roles-modal/roles-modal.component';
 
 @NgModule({
     declarations: [
@@ -43,7 +48,12 @@ import { MemberMessagesComponent } from "./members/member-messages/member-messag
         MemberEditComponent,
         PhotoEditorComponent,
         TextInputComponent,
-        DatePickerComponent
+        DatePickerComponent,
+        AdminPanelComponent,
+        HasRoleDirective,
+        UserManagementComponent,
+        PhotoManagementComponent,
+        RolesModalComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

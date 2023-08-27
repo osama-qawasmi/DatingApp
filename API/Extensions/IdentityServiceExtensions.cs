@@ -1,5 +1,8 @@
 using System.Text;
+using API.Data;
+using API.Enitities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 namespace API.Extensions
@@ -8,6 +11,16 @@ namespace API.Extensions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
+
+            services.AddIdentityCore<AppUser>(opt => {
+                opt.Password.RequiredLength = 3;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireUppercase = false;
+            })
+            .AddRoles<AppRole>()
+            .AddRoleManager<RoleManager<AppRole>>()
+            .AddEntityFrameworkStores<DataContext>();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
              options.TokenValidationParameters = new TokenValidationParameters
@@ -18,6 +31,13 @@ namespace API.Extensions
              ValidateAudience = false
              };
             });
+
+            services.AddAuthorization(opt => 
+            {
+                opt.AddPolicy("RequiredAdminRole", policy => policy.RequireRole(RoleConst.Admin));
+                opt.AddPolicy("RequiredAdminOrModeratorRole", policy => policy.RequireRole(RoleConst.Admin, RoleConst.Moderator));
+            });
+
             return services;
         }
     }

@@ -24,6 +24,8 @@ namespace API.Controllers
             _userRepository = userRepository;
         }
 
+        //[Authorize(Roles = RoleConst.Admin)]
+        [Authorize(Roles = RoleConst.Moderator)]
         [HttpGet]
         public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
@@ -41,6 +43,7 @@ namespace API.Controllers
             return Ok(users);
         }
 
+        [Authorize(Roles = RoleConst.Member)]
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
