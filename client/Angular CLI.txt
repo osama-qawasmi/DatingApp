@@ -56,3 +56,5 @@ npm install ng2-file-upload@next
 npm install ng2-file-upload@next --legacy-peer-deps
 
 npm install ngx-timeago --legacy-peer-deps
+
+npm install @microsoft/signalr
