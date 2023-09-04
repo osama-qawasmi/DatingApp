@@ -18,16 +18,17 @@ namespace API.Extensions
             });
             services.AddCors();
             services.AddScoped<ITokenService, Services.TokenService>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            //services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<LogUserActivity>();
-            services.AddScoped<ILikeRepository, LikeRepository>();
-            services.AddScoped<IMessageRepository, MessageRepository>();
+            //services.AddScoped<ILikeRepository, LikeRepository>();
+            //services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddSignalR();
             //services.AddSignalR(e => {e.MaximumReceiveMessageSize = 102400000;});
             services.AddSingleton<PresenceTracker>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }
