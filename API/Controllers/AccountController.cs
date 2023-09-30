@@ -5,6 +5,7 @@ using API.DTOs;
 using API.Enitities;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -33,10 +34,10 @@ namespace API.Controllers
             var user = _mapper.Map<AppUser>(registerDto);
             user.UserName = registerDto.Username.ToLower();
             var result = await _userManager.CreateAsync(user, registerDto.Password);
-            if(!result.Succeeded) return BadRequest(result.Errors); 
+            if (!result.Succeeded) return BadRequest(result.Errors);
 
             var roleResult = await _userManager.AddToRoleAsync(user, RoleConst.Member);
-            if(!roleResult.Succeeded)return BadRequest(result.Errors);
+            if (!roleResult.Succeeded) return BadRequest(result.Errors);
 
             return new UserDto
             {
@@ -47,14 +48,15 @@ namespace API.Controllers
             };
         }
 
+        //[EnableCors("MyPolicy1")]
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var user = await _userManager.Users.Include(x => x.Photos).SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
             if (user == null) return Unauthorized("Invalid Username!");
-            
+
             var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
-            if(!result) return Unauthorized("Invalid Password!");
+            if (!result) return Unauthorized("Invalid Password!");
 
             return new UserDto
             {
